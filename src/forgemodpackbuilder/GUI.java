@@ -270,17 +270,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-            downloader.main(null);
-            downloader1.main(null);
-            // TODO add your handling code here:
-            VerzeichnisDurchsuchen3.main(null);
-            DateiKopierenClass1.main(null);
-            DateiKopierenClass2.main(null);
-            String file = "./modpack/modpack/" + GUI.datei.substring(GUI.datei.lastIndexOf("/") + 1);
-            new File(file).renameTo(new File("./modpack/modpack/forge.jar"));
             frage.main(null);
-        } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Throwable ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
