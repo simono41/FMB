@@ -18,7 +18,7 @@ public class UnZip {
     static String modpack1 = "";
     public static void main() {
     String source = modpack;
-    String destination = System.getProperty("user.home") + "/.minecraft";
+    String destination = modpack1;
     String password = "mypassword";
 
     try {

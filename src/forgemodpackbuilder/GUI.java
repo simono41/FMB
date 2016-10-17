@@ -297,6 +297,10 @@ public class GUI extends javax.swing.JFrame {
             OeffnenDialogClass a = new OeffnenDialogClass();
             System.out.println("GUI = " + datei);
             UnZip.modpack = datei;
+            JOptionPane.showMessageDialog(null, "Bitte geben sie einen Installationsort für das Modpack!");
+            OeffnenDialogClass.main(null);
+            System.out.println("GUI = " + datei);
+            UnZip.modpack1 = datei;
             UnZip.main();
             jButton4ActionPerformed(evt);
         } catch (java.lang.NullPointerException ex) {
