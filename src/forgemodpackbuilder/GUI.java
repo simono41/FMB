@@ -385,7 +385,7 @@ public class GUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            System.out.println("HalloWelt");
+            System.out.println("Hallo Welt");
             new GUI().setVisible(true);
             File dir = new File("./modpack");
             dir.mkdir();
