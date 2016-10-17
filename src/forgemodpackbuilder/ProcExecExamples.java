@@ -19,7 +19,12 @@ public class ProcExecExamples {
 
         if (isWindowsSystem()) {
             System.out.println("Windows");
-            Runtime.getRuntime().exec("cmd /c help");
+            if (funktion == 1) {
+                Runtime.getRuntime().exec("cmd /c C:\\Users\\" + System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\Minecraft.jar");
+            }
+            if (funktion == 2) {
+                Runtime.getRuntime().exec("cmd /c C:\\Users\\" + System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\forge.jar");
+            }
         }
         if (isLinuxSystem()) {
             System.out.println("Linux");
