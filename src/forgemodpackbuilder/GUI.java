@@ -5,6 +5,7 @@
  */
 package forgemodpackbuilder;
 
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -61,6 +62,11 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel1.setText("Version");
 
+        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jList1KeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
         jList1.getAccessibleContext().setAccessibleDescription("");
 
@@ -345,6 +351,14 @@ public class GUI extends javax.swing.JFrame {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("ENTER pressed");
+            jButton1ActionPerformed(null);
+        }
+    }//GEN-LAST:event_jList1KeyPressed
 
     DefaultListModel dim2 = new DefaultListModel();
 
