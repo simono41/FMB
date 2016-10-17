@@ -9,7 +9,6 @@ package forgemodpackbuilder;
  *
  * @author simonr
  */
-import java.io.*;
 
 public class ProcExecExamples {
 
@@ -17,34 +16,11 @@ public class ProcExecExamples {
 
     public static void main(String[] args) throws Exception {
 
-        if (isWindowsSystem()) {
-            System.out.println("Windows");
-            if (funktion == 1) {
-                Runtime.getRuntime().exec("cmd /c C:\\Users\\" + System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\Minecraft.jar");
-            }
-            if (funktion == 2) {
-                Runtime.getRuntime().exec("cmd /c C:\\Users\\" + System.getProperty("user.home") + "\\AppData\\Roaming\\.minecraft\\forge.jar");
-            }
+        if (funktion == 1) {
+            Runtime.getRuntime().exec("java -jar ./modpack/Minecraft.jar");
         }
-        if (isLinuxSystem()) {
-            System.out.println("Linux");
-            if (funktion == 1) {
-                Runtime.getRuntime().exec("java -jar " + System.getProperty("user.home") + "/.minecraft/Minecraft.jar");
-            }
-            if (funktion == 2) {
-                Runtime.getRuntime().exec("java -jar " + System.getProperty("user.home") + "/.minecraft/forge.jar");
-            }
-
+        if (funktion == 2) {
+            Runtime.getRuntime().exec("java -jar ./modpack/modpack/forge.jar");
         }
-    }
-
-    static boolean isWindowsSystem() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        return osName.indexOf("windows") >= 0;
-    }
-
-    static boolean isLinuxSystem() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        return osName.indexOf("linux") >= 0;
     }
 }
