@@ -5,6 +5,10 @@
  */
 package forgemodpackbuilder;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author simonr
@@ -80,6 +84,12 @@ public class frage extends javax.swing.JFrame {
         Zip a = new Zip();
         a.modpack = name;
         a.archiveDir(null);
+        Modpacktxt.name = name;
+        try {
+            Modpacktxt.main(null);
+        } catch (IOException ex) {
+            Logger.getLogger(frage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

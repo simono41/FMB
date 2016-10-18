@@ -28,8 +28,7 @@ public class Suche {
                 if (fileThatYouWantToFilter.startsWith(name)
                         && fileThatYouWantToFilter.endsWith(".jar")) {
                     System.out.println("found" + " " + fileThatYouWantToFilter);
-                    GUI.mods1[i] = "./modpack/" +  GUI.version + "/mods/" + fileThatYouWantToFilter;
-                    i++;
+                    GUI.mods0.add("./modpack/" +  GUI.version + "/mods/" + fileThatYouWantToFilter);
                 }
             }
         }

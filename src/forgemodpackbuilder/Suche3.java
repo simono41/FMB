@@ -11,7 +11,7 @@ package forgemodpackbuilder;
  */
 import java.io.File;
 
-public class VerzeichnisDurchsuchen3 {
+public class Suche3 {
 
     public static void main(String[] args) {
 

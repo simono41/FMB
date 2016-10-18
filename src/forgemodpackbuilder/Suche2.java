@@ -11,7 +11,7 @@ package forgemodpackbuilder;
  */
 import java.io.File;
 
-public class VerzeichnisDurchsuchen2 {
+public class Suche2 {
 
     static String filename;
 

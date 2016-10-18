@@ -8,6 +8,7 @@ package forgemodpackbuilder;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -20,8 +21,8 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 
     static String datei = null;
-    static String[] mods1 = new String[300];
-    static String[] mods2 = new String[300];
+    static ArrayList<String> mods0 = new ArrayList<String>();
+    static ArrayList<String> mods1 = new ArrayList<String>();
     static String version = "1.10.2";
 
     /**
@@ -56,6 +57,7 @@ public class GUI extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ForgeModpackBuilder");
@@ -109,7 +111,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1.10.2", "1.9.4", "1.8.9", "1.7.10" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modpacks", "1.10.2", "1.9.4", "1.8.9", "1.7.10" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -151,6 +153,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(4, 4, 4)
@@ -162,8 +165,8 @@ public class GUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)
@@ -173,7 +176,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jButton8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
@@ -207,7 +210,8 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -228,24 +232,46 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        File dir = new File("./modpack/modpack");
-        dir.mkdir();
-        dir = new File("./modpack/modpack/mods");
-        dir.mkdir();
-        for (int i = 0; i < 200; i++) {
-            mods1[i] = null;
-            mods2[i] = null;
+        //jProgressBar1.setValue(10);
+        String s = (String) jComboBox1.getSelectedItem();
+        System.out.println(s);
+        version = s;
+        try {
+            if (!version.equals("Modpacks")) {
+                File dir = new File("./modpack/" + version);
+                dir.mkdir();
+                dir = new File("./modpack/" + version + "/mods");
+                dir.mkdir();
+            }
+            File dir = new File("./modpack/modpack");
+            dir.mkdir();
+            dir = new File("./modpack/modpack/mods");
+            dir.mkdir();
+            mods0.clear();
+            mods1.clear();
+            if (version.equals("Modpacks")) {
+                ModpackSuche.main(null);
+            } else {
+                Suche.main(null);
+            }
+            Suche1.main(null);
+            System.out.println("Tabelle 1 Mods = " + mods0.size());
+            DefaultListModel dim = new DefaultListModel();
+            DefaultListModel dim1 = new DefaultListModel();
+            for (int i = 0; i < mods0.size(); i++) {
+                dim.addElement(mods0.get(i));
+            }
+            System.out.println("Tabelle 2 Mods = " + mods1.size());
+            for (int i = 0; i < mods1.size(); i++) {
+                dim1.addElement(mods1.get(i));
+            }
+            jList1.setModel(dim);
+            jList2.setModel(dim1);
+        } catch (java.lang.NullPointerException ex) {
+            System.out.println("VerbindungsFehler 404!!!");
+        } catch (IOException ex) {
+            System.out.println("Fehler!!!");
         }
-        Suche.main(mods1);
-        Suche1.main(mods2);
-        DefaultListModel dim = new DefaultListModel();
-        DefaultListModel dim1 = new DefaultListModel();
-        for (int i = 0; i < 200; i++) {
-            dim.addElement(mods1[i]);
-            dim1.addElement(mods2[i]);
-        }
-        jList1.setModel(dim);
-        jList2.setModel(dim1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -278,13 +304,6 @@ public class GUI extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        String s = (String) jComboBox1.getSelectedItem();
-        System.out.println(s);
-        version = s;
-        File dir = new File("./modpack/" + version);
-        dir.mkdir();
-        dir = new File("./modpack/" + version + "/mods");
-        dir.mkdir();
         jButton2ActionPerformed(evt);
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -292,19 +311,32 @@ public class GUI extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         try {
-            JOptionPane.showMessageDialog(null, "Bitte geben sie den Pfad zu dem Modpack ein!");
-            OeffnenDialogClass.main(null);
-            OeffnenDialogClass a = new OeffnenDialogClass();
-            System.out.println("GUI = " + datei);
-            UnZip.modpack = datei;
-            JOptionPane.showMessageDialog(null, "Bitte geben sie einen Installationsort für das Modpack!");
-            OeffnenDialogClass.main(null);
-            System.out.println("GUI = " + datei);
-            UnZip.modpack1 = datei;
-            UnZip.main();
+            if (!version.equals("Modpacks")) {
+                JOptionPane.showMessageDialog(null, "Bitte geben sie den Pfad zu dem Modpack ein!");
+                OeffnenDialogClass.main(null);
+                OeffnenDialogClass a = new OeffnenDialogClass();
+                System.out.println("GUI = " + datei);
+                UnZip.modpack = datei;
+                JOptionPane.showMessageDialog(null, "Bitte geben sie einen Installationsort für das Modpack!");
+                OeffnenDialogClass.main(null);
+                System.out.println("GUI = " + datei);
+                UnZip.modpack1 = datei;
+                UnZip.main();
+            } else {
+                ModpackDownloader.modpack = jList1.getSelectedValue();
+                JOptionPane.showMessageDialog(null, "Bitte geben sie einen Installationsort für das Modpack!");
+                OeffnenDialogClass.main(null);
+                System.out.println("GUI = " + datei);
+                File dir = new File(datei + "/mods");
+                dir.mkdir();
+                ModpackDownloader.install = datei;
+                ModpackDownloader.main(null);
+            }
             jButton4ActionPerformed(evt);
         } catch (java.lang.NullPointerException ex) {
-            System.out.println("Keine Eingabe");
+            System.out.println("Keine Eingabe!!!");
+        }catch (IOException ex) {
+            System.out.println("Fehler!!!");
         }
         //jButton3ActionPerformed(evt);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -336,7 +368,7 @@ public class GUI extends javax.swing.JFrame {
             // TODO add your handling code here:
             downloader.main(null);
             downloader1.main(null);
-            VerzeichnisDurchsuchen3.main(null);
+            Suche3.main(null);
             DateiKopierenClass1.main(null);
             DateiKopierenClass2.main(null);
             String file = "./modpack/modpack/" + GUI.datei.substring(GUI.datei.lastIndexOf("/") + 1);
@@ -415,6 +447,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;

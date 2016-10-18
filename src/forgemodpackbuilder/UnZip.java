@@ -29,6 +29,6 @@ public class UnZip {
         zipFile.extractAll(destination);
     } catch (ZipException e) {
         e.printStackTrace();
-    }
+    } 
 }
 }
