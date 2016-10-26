@@ -25,7 +25,7 @@ public class ModpackSuche {
 
     public static void main(String[] args) throws IOException {
 
-        final URL url = new URL("http://localhost/modpacks.txt");
+        final URL url = new URL(GUI.URL + "/modpacks.txt");
         final URLConnection conn = url.openConnection();
         try (InputStream is = new BufferedInputStream(conn.getInputStream())) {
             final OutputStream os;

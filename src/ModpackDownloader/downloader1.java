@@ -8,10 +8,7 @@ package ModpackDownloader;
 import forgemodpackbuilder.GUI;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -48,21 +45,17 @@ public class downloader1 {
             version = forge7;
         }
         if (GUI.version.equals("Modpacks")) {
-            FileReader fr = new FileReader("./modpack/modpack.txt");
-            BufferedReader br = new BufferedReader(fr);
-            total = br.readLine();
-            System.out.println(total);
 
-            if (total.equals("1.10.2")) {
+            if (ModpackDownloader.version.equals("1.10.2")) {
                 version = forge10;
             }
-            if (total.equals("1.9.4")) {
+            if (ModpackDownloader.version.equals("1.9.4")) {
                 version = forge9;
             }
-            if (total.equals("1.8.9")) {
+            if (ModpackDownloader.version.equals("1.8.9")) {
                 version = forge8;
             }
-            if (total.equals("1.7.10")) {
+            if (ModpackDownloader.version.equals("1.7.10")) {
                 version = forge7;
             }
         }

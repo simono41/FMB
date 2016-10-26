@@ -5,7 +5,6 @@
  */
 package ModpackDownloader;
 
-import ModpackDownloader.ModpackDownloader2;
 import forgemodpackbuilder.GUI;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,12 +19,12 @@ public class ModpackDownloader {
 
     static int mods = 0;
     public static String zeile = "";
-    private static String version;
+    public static String version;
 
     public static void main(String[] args) throws MalformedURLException, IOException {
 
         //Modpack URL Suchen
-        ModpackDownloader2.URL = "http://localhost/" + zeile;
+        ModpackDownloader2.URL = GUI.URL + zeile;
         ModpackDownloader2.output = "./modpack/modpack.txt";
         ModpackDownloader2.main(null);
 
@@ -45,9 +44,12 @@ public class ModpackDownloader {
         version = br1.readLine();
 
         while ((zeile = br1.readLine()) != null) {
-            ModpackDownloader2.URL = "http://localhost/mods/" + version + "/" + zeile;
+            ModpackDownloader2.URL = GUI.URL + "mods/" + version + "/" + zeile;
             ModpackDownloader2.output = GUI.datei + "/mods/" + zeile;
             ModpackDownloader2.main(null);
+            
+            System.out.println("URL = " + GUI.URL + version + "/" + zeile);
+            System.out.println("Output = " + GUI.datei + "/mods/" + zeile);
 
             //Progressbar
             GUI.zahl = mods;

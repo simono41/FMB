@@ -3,24 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Zipper;
-
-import Zipper.AktuellesDatumJava8;
-import Zipper.Zip;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package forgemodpackbuilder;
 
 /**
  *
  * @author simonr
  */
-public class frage extends javax.swing.JFrame {
+public class Server extends javax.swing.JFrame {
 
     /**
-     * Creates new form frage
+     * Creates new form URL
      */
-    public frage() {
+    public Server() {
         initComponents();
     }
 
@@ -39,10 +33,9 @@ public class frage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
-        jLabel1.setText("Wie soll ihr Modpack  heißen!");
+        jLabel1.setText("Wie ist die neue Server-URL");
 
-        jButton1.setText("OK");
+        jButton1.setText("Bestätigen");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -56,11 +49,13 @@ public class frage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(0, 189, Short.MAX_VALUE))
+                    .addComponent(jTextField1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -80,18 +75,7 @@ public class frage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = jTextField1.getText();
-        System.out.println(name);
-        AktuellesDatumJava8.main(null);
-        Zip a = new Zip();
-        a.modpack = name;
-        a.archiveDir(null);
-        Modpacktxt.name = name;
-        try {
-            Modpacktxt.main(null);
-        } catch (IOException ex) {
-            Logger.getLogger(frage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GUI.URL = jTextField1.getText();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
