@@ -16,7 +16,6 @@ import net.lingala.zip4j.util.*;
 public class Zip {
     
     String modpack = "";
-    static String datum = "";
 
     void archiveDir(String path) {
         try {
@@ -25,7 +24,7 @@ public class Zip {
             ZipFile zipFile = new ZipFile(modpack + ".zip");
 
             // Folder to add
-            String folderToAdd = "./modpack/modpack/config";
+            String folderToAdd = "./modpack/modpack";
 
             // Initiate Zip Parameters which define various properties such
             // as compression method, etc.
@@ -38,7 +37,7 @@ public class Zip {
             parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
             
             // Set the root folder
-            //parameters.setIncludeRootFolder(false);
+            parameters.setIncludeRootFolder(false);
 
             // Add folder to the zip file
             zipFile.addFolder(folderToAdd, parameters);

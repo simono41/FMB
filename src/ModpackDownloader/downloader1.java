@@ -8,7 +8,9 @@ package ModpackDownloader;
 import forgemodpackbuilder.GUI;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -18,8 +20,6 @@ import java.net.URLConnection;
  *
  * @author simonr
  */
-
-
 public class downloader1 {
 
     public static void main(String[] args) throws Throwable {
@@ -31,6 +31,7 @@ public class downloader1 {
 
         String total = "";
         String version = "";
+        String version1 = "";
 
         if (GUI.version.equals("1.10.2")) {
             version = forge10;
@@ -46,16 +47,22 @@ public class downloader1 {
         }
         if (GUI.version.equals("Modpacks")) {
 
-            if (ModpackDownloader.version.equals("1.10.2")) {
+            FileReader fr = new FileReader("./modpack/modpack/version.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            version1 = br.readLine();
+            br.close();
+
+            if (version1.equals("1.10.2")) {
                 version = forge10;
             }
-            if (ModpackDownloader.version.equals("1.9.4")) {
+            if (version1.equals("1.9.4")) {
                 version = forge9;
             }
-            if (ModpackDownloader.version.equals("1.8.9")) {
+            if (version1.equals("1.8.9")) {
                 version = forge8;
             }
-            if (ModpackDownloader.version.equals("1.7.10")) {
+            if (version1.equals("1.7.10")) {
                 version = forge7;
             }
         }
