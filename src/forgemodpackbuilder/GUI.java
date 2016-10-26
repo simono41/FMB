@@ -35,7 +35,7 @@ public class GUI extends javax.swing.JFrame {
     public static ArrayList<String> mods0 = new ArrayList<String>();
     public static ArrayList<String> mods1 = new ArrayList<String>();
     public static String version = "1.10.2";
-    public static String datei2 = null;
+    public static String datei1 = null;
     public static int funktion = 0;
     public static String  URL = "http://mgwywbvcwmot7vir.myfritz.net/";
 

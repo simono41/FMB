@@ -24,7 +24,7 @@ public class downloader1 {
 
     public static void main(String[] args) throws Throwable {
 
-        String forge10 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.2.2107/forge-1.10.2-12.18.2.2107-installer.jar";
+        String forge10 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.10.2-12.18.2.2114/forge-1.10.2-12.18.2.2114-installer.jar";
         String forge9 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.9.4-12.17.0.2051/forge-1.9.4-12.17.0.2051-installer.jar";
         String forge8 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8.9-11.15.1.1902-1.8.9/forge-1.8.9-11.15.1.1902-1.8.9-installer.jar";
         String forge7 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-installer.jar";
