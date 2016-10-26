@@ -5,74 +5,40 @@
  */
 package ModpackDownloader;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
+/**
+ *
+ * @author simonr
+ */
 public class ModpackDownloader1 {
 
     static String URL;
     static String output;
-    private static JProgressBar jProgressBar;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MalformedURLException, IOException {
 
-        jProgressBar = new JProgressBar();
-        jProgressBar.setMaximum(100000);
-        JFrame frame = new JFrame();
-        frame.setContentPane(jProgressBar);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setSize(300, 70);
-        frame.setVisible(true);
-
-        run();
-        frame.dispose();
-
-    }
-
-    public static void run() {
-        try {
-
-            URL url = new URL(URL);
-            HttpURLConnection httpConnection = (HttpURLConnection) (url.openConnection());
-            long completeFileSize = httpConnection.getContentLength();
-
-            java.io.BufferedInputStream in = new java.io.BufferedInputStream(httpConnection.getInputStream());
-            java.io.FileOutputStream fos = new java.io.FileOutputStream(output);
-            java.io.BufferedOutputStream bout = new BufferedOutputStream(
-                    fos, 1024);
-            byte[] data = new byte[1024];
-            long downloadedFileSize = 0;
-            int x = 0;
-            while ((x = in.read(data, 0, 1024)) >= 0) {
-                downloadedFileSize += x;
-
-                // calculate progress
-                final int currentProgress = (int) ((((double) downloadedFileSize) / ((double) completeFileSize)) * 100000d);
-
-                // update progress bar
-                SwingUtilities.invokeLater(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        jProgressBar.setValue(currentProgress);
-                    }
-                });
-
-                bout.write(data, 0, x);
+        final URL url = new URL(URL);
+        final URLConnection conn = url.openConnection();
+        try (InputStream is = new BufferedInputStream(conn.getInputStream())) {
+            final OutputStream os;
+            os = new BufferedOutputStream(new FileOutputStream(output));
+            byte[] chunk = new byte[1024];
+            int chunkSize;
+            while ((chunkSize = is.read(chunk)) != -1) {
+                os.write(chunk, 0, chunkSize);
             }
-            bout.close();
-            in.close();
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
+            os.flush(); // Necessary for Java < 6
+            os.close();
+
         }
     }
-
 }
