@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package Zipper;
 
+import forgemodpackbuilder.GUI;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class Modpacktxt {
         FileWriter fw = new FileWriter(name + ".txt");
         BufferedWriter bw = new BufferedWriter(fw);
 
+        bw.write(GUI.version);
         for (int i = 0; i < GUI.mods1.size(); i++) {
             bw.write(GUI.mods1.get(i).substring( GUI.mods1.get(i).lastIndexOf( "/" ) + 1 ));
             bw.newLine();

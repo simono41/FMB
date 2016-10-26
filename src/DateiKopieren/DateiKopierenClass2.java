@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package DateiKopieren;
 
 /**
  *
@@ -15,11 +15,11 @@ import java.io.FileOutputStream;
 import java.io.IOException; 
 import java.nio.channels.FileChannel; 
 
-public class DateiKopierenClass1 { 
+public class DateiKopierenClass2 { 
      
     public static void main(String[] args) throws IOException { 
-        File inF = new File(GUI.datei); 
-        File outF = new File("./modpack/modpack/" + GUI.datei.substring( GUI.datei.lastIndexOf( "/" ) + 1 )); 
+        File inF = new File("./modpack/Minecraft.jar"); 
+        File outF = new File("./modpack/modpack/Minecraft.jar"); 
         copyFile(inF, outF); 
     } 
      
@@ -42,4 +42,5 @@ public class DateiKopierenClass1 {
         } 
     } 
 } 
+
 

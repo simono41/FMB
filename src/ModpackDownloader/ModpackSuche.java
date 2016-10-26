@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package ModpackDownloader;
 
+import forgemodpackbuilder.GUI;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -19,18 +21,15 @@ import java.net.URLConnection;
  *
  * @author simonr
  */
-public class ModpackDownloader2 {
+public class ModpackSuche {
 
-    static String URL;
-    static String output;
+    public static void main(String[] args) throws IOException {
 
-    public static void main(String[] args) throws MalformedURLException, IOException {
-
-        final URL url = new URL(URL);
+        final URL url = new URL("http://localhost/modpacks.txt");
         final URLConnection conn = url.openConnection();
         try (InputStream is = new BufferedInputStream(conn.getInputStream())) {
             final OutputStream os;
-            os = new BufferedOutputStream(new FileOutputStream(output));
+            os = new BufferedOutputStream(new FileOutputStream("./modpack/modpacks.txt"));
             byte[] chunk = new byte[1024];
             int chunkSize;
             while ((chunkSize = is.read(chunk)) != -1) {
@@ -39,6 +38,22 @@ public class ModpackDownloader2 {
             os.flush(); // Necessary for Java < 6
             os.close();
 
+            // Datei durchsuchen
+            FileReader fr = new FileReader("./modpack/modpacks.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String zeile;
+
+            while ((zeile = br.readLine()) != null) {
+                GUI.mods0.add(zeile);
+            }
+            System.out.println("Zeilen = " + GUI.mods0.size());
+
+            for (int i = 0; i < GUI.mods0.size(); i++) {
+                System.out.println(GUI.mods0.get(i));
+            }
+            br.close();
+
         }
+
     }
 }

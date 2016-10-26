@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package Zipper;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -14,8 +14,8 @@ import net.lingala.zip4j.exception.ZipException;
  */
 
 public class UnZip {
-    static String modpack = "";
-    static String modpack1 = "";
+    public static String modpack = "";
+    public static String modpack1 = "";
     public static void main() {
     String source = modpack;
     String destination = modpack1;

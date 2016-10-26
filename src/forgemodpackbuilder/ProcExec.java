@@ -10,17 +10,15 @@ package forgemodpackbuilder;
  * @author simonr
  */
 
-public class ProcExecExamples {
-
-    public static int funktion = 1;
+public class ProcExec {
 
     public static void main(String[] args) throws Exception {
 
-        if (funktion == 1) {
+        if (GUI.funktion == 1) {
             Runtime.getRuntime().exec("java -jar ./modpack/Minecraft.jar");
         }
-        if (funktion == 2) {
-            Runtime.getRuntime().exec("java -jar ./modpack/modpack/forge.jar");
+        if (GUI.funktion == 2) {
+            Runtime.getRuntime().exec("java -jar ./modpack/forge.jar");
         }
     }
 }

@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package ModpackDownloader;
 
+import forgemodpackbuilder.GUI;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 ;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -30,25 +33,45 @@ public class downloader1 {
         String forge7 = "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-installer.jar";
 
         String total = "";
+        String version = "";
 
         if (GUI.version.equals("1.10.2")) {
-            total = forge10;
+            version = forge10;
         }
         if (GUI.version.equals("1.9.4")) {
-            total = forge9;
+            version = forge9;
         }
         if (GUI.version.equals("1.8.9")) {
-            total = forge8;
+            version = forge8;
         }
         if (GUI.version.equals("1.7.10")) {
-            total = forge7;
+            version = forge7;
+        }
+        if (GUI.version.equals("Modpacks")) {
+            FileReader fr = new FileReader("./modpack/modpack.txt");
+            BufferedReader br = new BufferedReader(fr);
+            total = br.readLine();
+            System.out.println(total);
+
+            if (total.equals("1.10.2")) {
+                version = forge10;
+            }
+            if (total.equals("1.9.4")) {
+                version = forge9;
+            }
+            if (total.equals("1.8.9")) {
+                version = forge8;
+            }
+            if (total.equals("1.7.10")) {
+                version = forge7;
+            }
         }
 
-        final URL url = new URL(total);
+        final URL url = new URL(version);
         final URLConnection conn = url.openConnection();
         try (InputStream is = new BufferedInputStream(conn.getInputStream())) {
             final OutputStream os;
-            os = new BufferedOutputStream(new FileOutputStream("./modpack/" + GUI.version + "/" + total.substring(total.lastIndexOf("/") + 1)));
+            os = new BufferedOutputStream(new FileOutputStream("./modpack/forge.jar"));
             byte[] chunk = new byte[1024];
             int chunkSize;
             while ((chunkSize = is.read(chunk)) != -1) {

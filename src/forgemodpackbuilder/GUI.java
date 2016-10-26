@@ -5,6 +5,16 @@
  */
 package forgemodpackbuilder;
 
+import ModpackDownloader.ModpackSuche;
+import DateiKopieren.DateiKopierenClass;
+import DateiKopieren.FileDeleteExample;
+import Zipper.frage;
+import Zipper.UnZip;
+import ModpackDownloader.ModpackDownloader;
+import ModpackDownloader.downloader1;
+import ModpackDownloader.downloader;
+import Suche.Suche1;
+import Suche.Suche;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -20,10 +30,13 @@ import javax.swing.JOptionPane;
  */
 public class GUI extends javax.swing.JFrame {
 
-    static String datei = null;
-    static ArrayList<String> mods0 = new ArrayList<String>();
-    static ArrayList<String> mods1 = new ArrayList<String>();
-    static String version = "1.10.2";
+    public static String datei = null;
+    public static int zahl = 0;
+    public static ArrayList<String> mods0 = new ArrayList<String>();
+    public static ArrayList<String> mods1 = new ArrayList<String>();
+    public static String version = "1.10.2";
+    public static String datei2 = null;
+    public static int funktion = 0;
 
     /**
      * Creates new form GUI
@@ -56,7 +69,6 @@ public class GUI extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -139,13 +151,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Bibliotheken download");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,10 +165,8 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(158, 158, 158)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -179,11 +182,11 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,20 +195,19 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
+                    .addComponent(jButton6)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
                         .addComponent(jButton2)
-                        .addComponent(jButton5)
                         .addComponent(jButton8)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton7)))
+                        .addComponent(jButton4)
+                        .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
@@ -232,7 +234,6 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //jProgressBar1.setValue(10);
         String s = (String) jComboBox1.getSelectedItem();
         System.out.println(s);
         version = s;
@@ -275,23 +276,30 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        ProcExecExamples.funktion = 1;
+
         try {
-            ProcExecExamples.main(null);
-        } catch (Exception ex) {
+            downloader.main(null);
+            funktion = 1;
+            ProcExec.main(null);
+        } catch (Throwable ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        ProcExecExamples.funktion = 2;
+
         try {
-            ProcExecExamples.main(null);
-        } catch (Exception ex) {
+            // TODO add your handling code here:
+            File dir = new File(System.getProperty("user.home") + "/.minecraft");
+            dir.mkdir();
+
+            downloader1.main(null);
+            funktion = 2;
+            ProcExec.main(null);
+        } catch (Throwable ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -323,22 +331,22 @@ public class GUI extends javax.swing.JFrame {
                 UnZip.modpack1 = datei;
                 UnZip.main();
             } else {
-                ModpackDownloader.modpack = jList1.getSelectedValue();
                 JOptionPane.showMessageDialog(null, "Bitte geben sie einen Installationsort für das Modpack!");
                 OeffnenDialogClass.main(null);
                 System.out.println("GUI = " + datei);
                 File dir = new File(datei + "/mods");
                 dir.mkdir();
-                ModpackDownloader.install = datei;
+                System.out.println("Ausgewählt = " + jList1.getSelectedValue());
+                ModpackDownloader.zeile = jList1.getSelectedValue();
                 ModpackDownloader.main(null);
             }
+            jButton3ActionPerformed(evt);
             jButton4ActionPerformed(evt);
         } catch (java.lang.NullPointerException ex) {
             System.out.println("Keine Eingabe!!!");
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Fehler!!!");
         }
-        //jButton3ActionPerformed(evt);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -363,21 +371,6 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            // TODO add your handling code here:
-            downloader.main(null);
-            downloader1.main(null);
-            Suche3.main(null);
-            DateiKopierenClass1.main(null);
-            DateiKopierenClass2.main(null);
-            String file = "./modpack/modpack/" + GUI.datei.substring(GUI.datei.lastIndexOf("/") + 1);
-            new File(file).renameTo(new File("./modpack/modpack/forge.jar"));
-        } catch (Throwable ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
     private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -386,51 +379,13 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jList1KeyPressed
 
-    DefaultListModel dim2 = new DefaultListModel();
+    public void progressnext() {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        jProgressBar1.setMaximum(zahl);
+        jProgressBar1.setValue(jProgressBar1.getValue() + 1);
+        jProgressBar1.setStringPainted(true);
+        jProgressBar1.setString(datei);
 
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            System.out.println("Hallo Welt");
-            new GUI().setVisible(true);
-            File dir = new File("./modpack");
-            dir.mkdir();
-            System.out.println(System.getProperty("user.home"));
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -440,7 +395,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

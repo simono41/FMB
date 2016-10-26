@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forgemodpackbuilder;
+package DateiKopieren;
 
 /**
  *
  * @author simonr
  */
+import forgemodpackbuilder.GUI;
 import java.io.File;
  
 public class FileDeleteExample {
