@@ -5,8 +5,6 @@
  */
 package Zipper;
 
-import Zipper.AktuellesDatumJava8;
-import Zipper.Zip;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,7 +80,6 @@ public class frage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name = jTextField1.getText();
         System.out.println(name);
-        AktuellesDatumJava8.main(null);
         Zip a = new Zip();
         a.modpack = name;
         a.archiveDir(null);

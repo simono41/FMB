@@ -22,10 +22,10 @@ public class Zip {
         try {
 
             // Initiate ZipFile object with the path/name of the zip file.
-            ZipFile zipFile = new ZipFile(modpack + "-" + datum +  ".zip");
+            ZipFile zipFile = new ZipFile(modpack + ".zip");
 
             // Folder to add
-            String folderToAdd = "./modpack/modpack/";
+            String folderToAdd = "./modpack/modpack/config";
 
             // Initiate Zip Parameters which define various properties such
             // as compression method, etc.
@@ -38,7 +38,7 @@ public class Zip {
             parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL);
             
             // Set the root folder
-            parameters.setIncludeRootFolder(false);
+            //parameters.setIncludeRootFolder(false);
 
             // Add folder to the zip file
             zipFile.addFolder(folderToAdd, parameters);
