@@ -31,6 +31,7 @@ public class ModpackDownloader {
         
         UnZip.modpack = "./modpack/modpack.zip";
         UnZip.modpack1 = GUI.datei + "/";
+        UnZip.main();
 
         //Modpack URL Suchen
         ModpackDownloader2.URL = GUI.URL + zeile;
